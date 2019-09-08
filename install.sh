@@ -29,7 +29,7 @@ chown -R 1000:1000 ~/ssb-room-data
 #
 # Redirect internal 8007 to external 80
 #
-sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8007
+sudo iptables -t nat -A PREROUTING -i ens2 -p tcp --dport 80 -j REDIRECT --to-port 8007
 
 # create ./create-room script
 cat > ./create-room <<EOF
