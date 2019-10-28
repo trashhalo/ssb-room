@@ -40,7 +40,7 @@ docker run -d --name room \
    --network host \
    --restart unless-stopped \
    --memory "\$memory_limit" \
-   staltz/ssb-room
+   docker.pkg.github.com/trashhalo/ssb-room/ssb-room:latest
 EOF
 # make the script executable
 chmod +x ./create-room
@@ -64,6 +64,12 @@ docker run -d --name healer \
   -v /var/run/docker.sock:/tmp/docker.sock \
   --restart unless-stopped \
   ahdinosaur/healer
+
+docker run -d \
+    --name watchtower \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    --restart unless-stopped \
+    containrrr/watchtower
 
 # ensure containers are always running
 printf '#!/bin/sh\n\ndocker start room\n' | tee /etc/cron.hourly/room && chmod +x /etc/cron.hourly/room
